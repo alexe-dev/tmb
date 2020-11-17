@@ -38,6 +38,7 @@ const Tyrants = () => {
       <img
               src="/static/images/header.png"
               alt="gearlocs"
+              width="100%"
             />
         <h1 className="title">🦴 TMB Tyrant randomizer 🦴</h1>
         <section className="hero">
@@ -106,7 +107,7 @@ const Tyrants = () => {
       }
       .title {
         text-align: center;
-        padding-top: 2rem;
+        padding-top: 0rem;
       }
       .tyrant {
           font-size: 3rem;
