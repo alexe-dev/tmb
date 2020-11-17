@@ -34,7 +34,7 @@ const Home = (props) => {
           <a href="/">
             <h3>Go to toolkit list</h3>
           </a>
-          <a on="tap:AMP.setState({
+          <a href="#" on="tap:AMP.setState({
            tyrant: myState.tyrants[floor(random() * myState.tyrants.length)]
          })">
             <h3>Randomize again</h3>
