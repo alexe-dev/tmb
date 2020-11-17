@@ -1,12 +1,25 @@
 import Layout from '../components/Layout'
+import AmpState from '../components/amp/AmpState'
+import {useState, useCallback} from 'react';
 
 export const config = { amp: true }
 
-const Home = (props) => (
-  <>
+const tyrants = ['Nom', 'Mulmesh', 'Drellen', ' Gendricks', 'Goblin King', 'Marrow' ,'Duster', 'Barnacle', 'Kollossum', 'Goblin Queen', 'Vol`Kesh', 'Abomination', 'Nobulous', 'Deb', 'Sam' ,'Pat', 'Katherine Sunshine-Jackson', 'Amanight', 'Blobulous', 'Leech', 'Oxide', 'Locgear', 'Proto Tyrant'];
+const tyrant = tyrants[Math.floor(Math.random() * tyrants.length)]
+
+const Home = (props) => {
+   
+
+    
+ return  <>
+ <AmpState id="myState">
+            {{
+              tyrants,
+            }}
+          </AmpState>
     <Layout
-      title="Too many bones unofficial toolkit app"
-      description="Too many bones unofficial web companion app"
+      title="Too many bones tyrant randomizer"
+      description="Too many bones unofficial tyrant randomizer"
     >
       <amp-img
               src="/static/images/header.png"
@@ -15,27 +28,23 @@ const Home = (props) => (
               width="840"
               height="243"
             />
-        <h1 className="title">🦴 TMB toolkit 🦴</h1>
+        <h1 className="title">🦴 TMB Tyrant randomizer 🦴</h1>
         <section className="hero">
         
-          <a href="/tyrants">
-            <h3>Tyrant randomizer</h3>
-          </a>
           <a href="/">
-            <h3>Encounter challenges</h3>
+            <h3>Go to toolkit list</h3>
           </a>
-          <a href="/">
-            <h3>Blog 🦴 News</h3>
+          <a on="tap:AMP.setState({
+           tyrant: myState.tyrants[floor(random() * myState.tyrants.length)]
+         })">
+            <h3>Randomize again</h3>
           </a>
-          <a href="/">
-            <h3>Useful links</h3>
-          </a>
-          <a href="/">
-            <h3>Buyer's guide</h3>
-          </a>
-          <a href="/">
-            <h3>About</h3>
-          </a>
+          
+          
+          
+        </section>
+        <section>
+            <h1 className="tyrant"> Your next target is: <span data-amp-bind-text="tyrant" >{tyrant}</span> </h1>
         </section>
         
       
@@ -45,6 +54,10 @@ const Home = (props) => (
       .title {
         text-align: center;
         padding-top: 2rem;
+      }
+      .tyrant {
+          font-size: 3rem;
+          text-align:center;
       }
       .hero {
         display: grid;
@@ -70,7 +83,7 @@ const Home = (props) => (
       }
     `}</style>
   </>
-)
+}
 
 // amp-script requires absolute URLs, so we create a property `host` which we can use to calculate the script URL.
 export async function getServerSideProps({ req }) {
