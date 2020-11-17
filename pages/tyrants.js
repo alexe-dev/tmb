@@ -1,15 +1,33 @@
 import Layout from '../components/Layout'
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 
 
-const tyrants = ['Nom', 'Mulmesh', 'Drellen', ' Gendricks', 'Goblin King', 'Marrow' ,'Duster', 'Barnacle', 'Kollossum', 'Goblin Queen', 'Vol`Kesh', 'Abomination', 'Nobulous', 'Deb', 'Sam' ,'Pat', 'Katherine Sunshine-Jackson', 'Amanight', 'Blobulous', 'Leech', 'Oxide', 'Locgear', 'Proto Tyrant'];
-const getTyrant = () => tyrants[Math.floor(Math.random() * tyrants.length)]
+const tyrants = [{set: 'base', name: 'Nom'}, {set:'base', name: 'Mulmesh'}, {set:'base', name: 'Drellen'},
+{set:'base', name: 'Gendricks'}, {set:'base', name: 'Goblin King'}, {set:'base', name: 'Marrow'} ,{set:'base', name: 'Duster'},
+{set:'undertow', name: 'Barnacle'},{set:'Undertow', name: 'Kollossum'}, {set:'undertow', name:'Goblin Queen'},{set:'undertow', name: 'Vol`Kesh'},
+{set:'undertow', name: 'Abomination'},
+{set:'undertow', name:'Nobulous'}, {set:'april', name:'Deb'}, {set:'april', name:'Sam'} ,{set:'april', name:'Pat'}, {set:'april', name:'Katherine Sunshine-Jackson'}, {set:'splice', name:'Amanight'},
+{set:'splice', name:'Blobulous'}, {set:'splice', name:'Leech'}, {set:'splice', name:'Oxide'}, {set:'splice', name:'Locgear'},{set:'splice', name:'Build-A-Tyrant'}, {set:'splice', name:'Proto Tyrant'}];
+
+const initSets = {base:true, undertow:true, splice:true, april:true}
+
+const getTyrant = (sets) => {const filteredTyrants = tyrants.filter(t => sets[t.set]); return filteredTyrants.length ? filteredTyrants[Math.floor(Math.random() * filteredTyrants.length)] : {name:'nobody'}}
 
 
 const Tyrants = () => {
-   
-  const [tyrant, setTyrant] = useState(getTyrant());
-  const handleClick = useCallback(() => {setTyrant(getTyrant())}, [])
+  const [sets, setSets] = useState(initSets)
+  const [tyrant, setTyrant] = useState(getTyrant(initSets));
+  const handleClick = useCallback(() => {setTyrant(getTyrant(sets))}, [sets]);
+  const handleCheckbox = useCallback((e) => {
+    const target = e.target;
+    const value = target.checked;
+    const name = target.name;
+    const newSets = {...sets, [name]:value}
+  
+    setSets(newSets)
+    if(!newSets[tyrant.set])  {setTyrant(getTyrant(newSets))}
+  }, [sets])
+
     
  return  <>
 
@@ -31,14 +49,61 @@ const Tyrants = () => {
             <h3>Randomize again</h3>
           </a>
         </section>
-        <section>
-            <h1 className="tyrant"> Your next target is: {tyrant} </h1>
+        <section className="form">
+        <form>
+        <label>
+          Base set
+          <input
+            name="base"
+            type="checkbox"
+            checked={sets.base}
+            onChange={handleCheckbox} />
+        </label>
+        
+        <label>
+          Undertow
+          <input
+            name="undertow"
+            type="checkbox"
+            checked={sets.undertow}
+            onChange={handleCheckbox} />
+        </label>
+        
+        <label>
+          Splice &amp; Dice
+          <input
+            name="splice"
+            type="checkbox"
+            checked={sets.splice}
+            onChange={handleCheckbox} />
+        </label>
+        
+        <label>
+          April fools promo
+          <input
+            name="april"
+            type="checkbox"
+            checked={sets.april}
+            onChange={handleCheckbox} />
+        </label>
+        </form>
         </section>
+        <section>
+            <h3 className="tyrant"> Your next target is: {tyrant.name} </h3>
+        </section>
+        
+        
         
       
     </Layout>
     <style jsx>{`
-     
+      .form {
+        margin: 0 auto;
+        text-align:center;
+      }
+      input[type=checkbox]{
+        margin-right: 20px;
+      }
       .title {
         text-align: center;
         padding-top: 2rem;
@@ -46,6 +111,7 @@ const Tyrants = () => {
       .tyrant {
           font-size: 3rem;
           text-align:center;
+          margin:0;
       }
       .hero {
         display: grid;
