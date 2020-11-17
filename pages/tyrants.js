@@ -1,32 +1,25 @@
 import Layout from '../components/Layout'
-import AmpState from '../components/amp/AmpState'
 import {useState, useCallback} from 'react';
 
-export const config = { amp: true }
 
 const tyrants = ['Nom', 'Mulmesh', 'Drellen', ' Gendricks', 'Goblin King', 'Marrow' ,'Duster', 'Barnacle', 'Kollossum', 'Goblin Queen', 'Vol`Kesh', 'Abomination', 'Nobulous', 'Deb', 'Sam' ,'Pat', 'Katherine Sunshine-Jackson', 'Amanight', 'Blobulous', 'Leech', 'Oxide', 'Locgear', 'Proto Tyrant'];
-const tyrant = tyrants[Math.floor(Math.random() * tyrants.length)]
+const getTyrant = () => tyrants[Math.floor(Math.random() * tyrants.length)]
 
-const Home = (props) => {
+
+const Tyrants = () => {
    
-
+  const [tyrant, setTyrant] = useState(getTyrant());
+  const handleClick = useCallback(() => {setTyrant(getTyrant())}, [])
     
  return  <>
- <AmpState id="myState">
-            {{
-              tyrants,
-            }}
-          </AmpState>
+
     <Layout
       title="Too many bones tyrant randomizer"
       description="Too many bones unofficial tyrant randomizer"
     >
-      <amp-img
+      <img
               src="/static/images/header.png"
-              layout="responsive"
               alt="gearlocs"
-              width="840"
-              height="243"
             />
         <h1 className="title">🦴 TMB Tyrant randomizer 🦴</h1>
         <section className="hero">
@@ -34,17 +27,12 @@ const Home = (props) => {
           <a href="/">
             <h3>Go to toolkit list</h3>
           </a>
-          <a href="#" on="tap:AMP.setState({
-           tyrant: myState.tyrants[floor(random() * myState.tyrants.length)]
-         })">
+          <a href="#" onClick={handleClick}>
             <h3>Randomize again</h3>
           </a>
-          
-          
-          
         </section>
         <section>
-            <h1 className="tyrant"> Your next target is: <span data-amp-bind-text="tyrant" >{tyrant}</span> </h1>
+            <h1 className="tyrant"> Your next target is: {tyrant} </h1>
         </section>
         
       
@@ -85,11 +73,4 @@ const Home = (props) => {
   </>
 }
 
-// amp-script requires absolute URLs, so we create a property `host` which we can use to calculate the script URL.
-export async function getServerSideProps({ req }) {
-  return { props: { host: `https://${req.headers.host}` } }
-}
-
-
-
-export default Home
+export default Tyrants
