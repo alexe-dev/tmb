@@ -2,6 +2,6 @@
 
 Planned tools and resources:
 
-- [] Tyrant randomizer
-- [] Encounter challenges (predefined encounter cards and their order)
-- [] Blog and other content
+- [ ] Tyrant randomizer
+- [ ] Encounter challenges (predefined encounter cards and their order)
+- [ ] Blog and other content
