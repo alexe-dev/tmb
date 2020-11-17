@@ -9,6 +9,7 @@ const Home = () => (
       <img
               src="/static/images/header.png"
               alt="gearlocs"
+              width="100%"
             />
         <h1 className="title">🦴 TMB toolkit 🦴</h1>
         <section className="hero">
@@ -39,7 +40,7 @@ const Home = () => (
      
       .title {
         text-align: center;
-        padding-top: 2rem;
+        padding-top: 0rem;
       }
       .hero {
         display: grid;
