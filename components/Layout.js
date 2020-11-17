@@ -1,15 +1,8 @@
-import PropTypes from 'prop-types'
 import NextHead from 'next/head'
-import { AmpIncludeAmpInstallServiceworker } from './amp/AmpCustomElement'
 
 // Your app's theme color
 const THEME_COLOR = '#364016'
 
-/**
- * A sample page layout installing the AMP Serviceworker by default.
- *
- * @param {Props} props
- */
 const Layout = (props) => (
   <>
     <NextHead>
@@ -25,12 +18,7 @@ const Layout = (props) => (
     {props.children}
     <footer>The information presented on this site about Too Many Bones, Too Many Bones: Undertow, both literal and graphical, copyrighted by <a href="https://chiptheorygames.com/">Chip Theory Games</a>. This website is not produced, endorsed, supported, or affilitated with <a href="https://chiptheorygames.com/">Chip Theory Games</a>.</footer>
     </main>
-    <AmpIncludeAmpInstallServiceworker />
-    <amp-install-serviceworker
-      src="/serviceworker.js"
-      data-iframe-src="/install-serviceworker.html"
-      layout="nodisplay"
-    />
+   
 
     <style jsx global>{`
       body {
@@ -57,10 +45,5 @@ const Layout = (props) => (
     `}</style>
   </>
 )
-
-Layout.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-}
 
 export default Layout

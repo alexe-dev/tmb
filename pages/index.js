@@ -1,19 +1,14 @@
 import Layout from '../components/Layout'
 
-export const config = { amp: true }
-
-const Home = (props) => (
+const Home = () => (
   <>
     <Layout
       title="Too many bones unofficial toolkit app"
       description="Too many bones unofficial web companion app"
     >
-      <amp-img
+      <img
               src="/static/images/header.png"
-              layout="responsive"
               alt="gearlocs"
-              width="840"
-              height="243"
             />
         <h1 className="title">🦴 TMB toolkit 🦴</h1>
         <section className="hero">
@@ -71,12 +66,5 @@ const Home = (props) => (
     `}</style>
   </>
 )
-
-// amp-script requires absolute URLs, so we create a property `host` which we can use to calculate the script URL.
-export async function getServerSideProps({ req }) {
-  return { props: { host: `https://${req.headers.host}` } }
-}
-
-
 
 export default Home
